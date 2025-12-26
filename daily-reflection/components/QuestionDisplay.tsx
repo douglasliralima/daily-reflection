@@ -2,11 +2,11 @@ import { Text, View } from "react-native";
 
 interface QuestionDisplayProps {
     question?: string;
-    loading?: boolean;
+    isLoading?: boolean;
 }
 
-const QuestionDisplay = ({ question, loading }: QuestionDisplayProps) => {
-    if (loading) {
+const QuestionDisplay = ({ question, isLoading }: QuestionDisplayProps) => {
+    if (isLoading) {
         return (
             <View className="pt-16 pb-10 px-6">
                 <View className="h-7 w-11/12 rounded bg-neutral-800 mb-3" />

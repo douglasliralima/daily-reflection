@@ -1,12 +1,6 @@
-export default function mockAnswers(): Promise<Array<{
-    id: string;
-    content: string;
-    references?: Array<{
-        text: string;
-        source: string;
-    }>;
-    votes: number;
-}>> {
+import Answers from "@/model/Answer";
+
+export default function mockAnswers(): Promise<Answers[]> {
     return new Promise((resolve) => {
 
 

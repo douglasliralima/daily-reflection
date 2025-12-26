@@ -1,40 +1,27 @@
 import { mockQuestion } from "@/mock/mockQuestion";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 const DEFAULT_EXPIRATION_SECONDS = 48 * 60 * 60; // 48 hours
 
 export default function useQuestion() {
-    const [question, setQuestion] = useState<string | undefined>(undefined);
-    const [remainingSeconds, setRemainingSeconds] = useState<number>(DEFAULT_EXPIRATION_SECONDS); // Default to 48 hours
-    const [loading, setLoading] = useState(true);
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['question'],
+        queryFn: mockQuestion,
+        staleTime: DEFAULT_EXPIRATION_SECONDS * 1000,
+        refetchOnWindowFocus: false,
+    });
+
+    const [remainingSeconds, setRemainingSeconds] = useState<number>(DEFAULT_EXPIRATION_SECONDS);
 
     useEffect(() => {
-        let mounted = true;
-
-        async function loadQuestion() {
-            try {
-                const { content, expiresInSeconds } = await mockQuestion();
-                if (mounted) {
-                    setQuestion(content);
-                    setRemainingSeconds(expiresInSeconds ?? DEFAULT_EXPIRATION_SECONDS);
-                }
-            } finally {
-                if (mounted) {
-                    setLoading(false);
-                }
-            }
+        if (data?.expiresInSeconds) {
+            setRemainingSeconds(data.expiresInSeconds);
         }
-
-        loadQuestion();
-
-        return () => {
-            mounted = false;
-        };
-    }, []);
-
+    }, [data]);
 
     useEffect(() => {
-        if (loading) return;
+        if (isLoading || !data) return;
 
         const interval = setInterval(() => {
             setRemainingSeconds((prev) => {
@@ -45,7 +32,12 @@ export default function useQuestion() {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, [loading]);
+    }, [isLoading]);
 
-    return { question, remainingSeconds, loading };
+    return {
+        question: data?.content,
+        remainingSeconds,
+        isLoading,
+        isError,
+    };
 }
