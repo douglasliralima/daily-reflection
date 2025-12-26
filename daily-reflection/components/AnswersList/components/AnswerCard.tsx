@@ -1,3 +1,4 @@
+import ReferencesModal from "@/components/ReferencesModal";
 import { useDebouncedEffect } from "@/hooks/useDebounceEffect";
 import mockVote from "@/mock/mockVote";
 import Answers from "@/model/Answer";
@@ -9,7 +10,6 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
 
     const [votes, setVotes] = useState(answer.votes);
     const [userVote, setUserVote] = useState<"up" | "down" | "neutral">("neutral");
-
     const [openReferences, setOpenReferences] = useState(false);
 
     const textColorClass = {
@@ -41,6 +41,7 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
         [userVote],
         600
     );
+
     return (
         <View className="px-6 py-6 border-b border-neutral-800">
             <Text className="text-base text-neutral-100 leading-relaxed">
@@ -81,7 +82,7 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
                 {answer.references && answer.references.length > 0 && (
                     <Pressable
                         className="flex-row items-center gap-1.5"
-                        onPress={() => setOpenReferences(!openReferences)}
+                        onPress={() => setOpenReferences(true)}
                     >
                         <BookOpen size={13} strokeWidth={1.5} color="#9ca3af" />
                         <Text className="text-xs text-neutral-400">
@@ -90,6 +91,11 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
                     </Pressable>
                 )}
             </View>
+            <ReferencesModal
+                isOpen={openReferences}
+                onClose={() => setOpenReferences(false)}
+                references={answer.references || []}
+            />
         </View>
     );
 }

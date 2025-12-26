@@ -1,5 +1,5 @@
 import useAnswers from "@/components/AnswersList/hooks/useAnswers";
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import AnswerCard from "./components/AnswerCard";
 
 export default function AnswersList() {
@@ -8,9 +8,9 @@ export default function AnswersList() {
     if (answers.length === 0) {
         return (
             <View className="flex-1 items-center justify-center mt-4">
-                <View className="text-neutral-500">
+                <Text className="text-neutral-500">
                     No reflections yet. Be the first to share.
-                </View>
+                </Text>
             </View>
         );
     }
