@@ -1,0 +1,13 @@
+This was a answer of a user related of how he monetize his app, my idea is not to focus on the monetization
+
+I'm doing it much more for the sake of doing, not exactly to profit, buut, I need to pay the servers and do the
+maintanance, so some money would is necessary...
+
+We offer 3 tiers our apps, monthly subscription, yearly subscription and lifetime licence.
+
+Yearly cost about 3-4x monthly,
+Lifetime costs about 8-9x monthly.
+
+We get around 40% income from subscriptions and 60% from lifetime licenses.
+
+You can easily experiment with the lifetime licence price, since it doesn't break any auto renew subscriptions for users.
