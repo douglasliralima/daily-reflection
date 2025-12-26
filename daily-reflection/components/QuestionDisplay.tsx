@@ -8,7 +8,7 @@ interface QuestionDisplayProps {
 const QuestionDisplay = ({ question, isLoading }: QuestionDisplayProps) => {
     if (isLoading) {
         return (
-            <View className="pt-16 pb-10 px-6">
+            <View className="pt-8 pb-10 px-6">
                 <View className="h-7 w-11/12 rounded bg-neutral-800 mb-3" />
                 <View className="h-7 w-10/12 rounded bg-neutral-800 mb-3" />
                 <View className="h-7 w-8/12 rounded bg-neutral-800" />
@@ -18,7 +18,7 @@ const QuestionDisplay = ({ question, isLoading }: QuestionDisplayProps) => {
 
     if (!question) {
         return (
-            <View className="pt-16 pb-10 px-6">
+            <View className="pt-8 pb-10 px-6">
                 <Text className="text-2xl font-serif text-neutral-100 leading-snug">
                     No question available.
                 </Text>
@@ -27,7 +27,7 @@ const QuestionDisplay = ({ question, isLoading }: QuestionDisplayProps) => {
     }
 
     return (
-        <View className="pt-16 pb-10 px-6">
+        <View className="pt-8 pb-10 px-6">
             <Text className="text-2xl font-serif text-neutral-100 leading-snug">
                 {question}
             </Text>
