@@ -4,7 +4,12 @@ import { Text, TouchableOpacity, View } from "react-native";
 
 export default function AnswerBox() {
     return (
-        <View className="px-6 py-4">
+        <View className={clsx(
+            // padding
+            "px-6 py-4",
+            // border top style
+            "border-t border-neutral-700 border-solid",
+        )}>
             <TouchableOpacity
                 className={clsx(
                     // Styles for the answer box container

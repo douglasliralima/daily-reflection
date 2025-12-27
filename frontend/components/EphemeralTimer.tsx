@@ -15,7 +15,7 @@ function formatTime(seconds: number) {
 const EphemeralNotice = ({ remainingSeconds }: EphemeralNoticeProps) => {
     return (
         <View className="px-6 py-4 border-b border-neutral-800">
-            <Text className="text-xs text-neutral-500 text-center">
+            <Text className="text-xs font-semibold text-neutral-600 text-center">
                 This conversation disappears in {formatTime(remainingSeconds)}
             </Text>
         </View>

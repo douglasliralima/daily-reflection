@@ -10,7 +10,7 @@ export default function Index() {
   const { question, remainingSeconds, isLoading } = useQuestion()
 
   return (
-    <View className="flex-1 bg-neutral-950">
+    <View className="flex-1 bg-neutral-900">
       <ScrollView>
         <QuestionDisplay question={question} isLoading={isLoading} />
         <EphemeralNotice remainingSeconds={remainingSeconds ?? 0} />

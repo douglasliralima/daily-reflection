@@ -43,8 +43,8 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
     );
 
     return (
-        <View className="px-6 py-6 border-b border-neutral-800">
-            <Text className="text-base text-neutral-100 leading-relaxed">
+        <View className="px-6 py-4 border-b border-neutral-800">
+            <Text className="text-lg text-neutral-200 leading-relaxed">
                 {answer.content}
             </Text>
             <View className="flex-row items-center justify-between mt-5">

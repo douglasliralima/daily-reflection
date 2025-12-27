@@ -16,7 +16,7 @@ export default function RootLayout() {
           <Drawer
             screenOptions={({ navigation }) => ({
               headerStyle: {
-                backgroundColor: "#0a0a0a",
+                backgroundColor: "#171717",
               },
               headerTintColor: "#ffffff",
               headerShadowVisible: false,
@@ -50,7 +50,6 @@ export default function RootLayout() {
                     paddingHorizontal: 12,
                     paddingVertical: 6,
                     borderRadius: 10,
-                    backgroundColor: "#171717",
                   }}
                 >
                   <Text
