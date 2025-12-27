@@ -1,5 +1,5 @@
 import useAnswers from "@/components/AnswersList/hooks/useAnswers";
-import { ScrollView, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import AnswerCard from "./components/AnswerCard";
 
 export default function AnswersList() {
@@ -16,13 +16,12 @@ export default function AnswersList() {
     }
 
     return (
-        <ScrollView
-            className="flex-1 gap-2 mt-4"
-            contentContainerStyle={{ paddingBottom: 24 }}
+        <View
+            className="flex-1 gap-2 mt-4 pb-6"
         >
             {answers.map((answer) => (
                 <AnswerCard key={answer.id} answer={answer} />
             ))}
-        </ScrollView>
+        </View>
     );
 }

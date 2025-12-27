@@ -1,4 +1,4 @@
-import ReferencesModal from "@/components/ReferencesModal";
+import ReferencesModal from "@/components/AnswersList/components/ReferencesModal";
 import { useDebouncedEffect } from "@/hooks/useDebounceEffect";
 import mockVote from "@/mock/mockVote";
 import Answers from "@/model/Answer";
