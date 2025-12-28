@@ -1,7 +1,7 @@
 import type { BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useEffect, useMemo, useRef } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 interface Reference {
     text: string;
@@ -11,14 +11,12 @@ interface Reference {
 interface ReferencesModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onBack?: () => void;
     references: Reference[];
 }
 
 export default function ReferencesModal({
     isOpen,
     onClose,
-    onBack,
     references,
 }: ReferencesModalProps) {
     const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -52,12 +50,6 @@ export default function ReferencesModal({
             handleIndicatorStyle={{ backgroundColor: '#525252' }}
         >
             <View className="px-6 pb-6 flex-1">
-                {onBack ? (
-                    <Pressable onPress={onBack} className="py-2 mb-2">
-                        <Text className="text-blue-500 text-base">← Back</Text>
-                    </Pressable>
-                ) : null}
-
                 <Text className="text-xl font-bold text-neutral-100 mb-4">
                     References
                 </Text>
