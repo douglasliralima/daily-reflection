@@ -1,23 +1,19 @@
+import { useModalBoxContext } from "@/context/ModalContext";
 import {
     BottomSheetBackdrop,
     BottomSheetBackdropProps,
     BottomSheetModal,
 } from "@gorhom/bottom-sheet";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Platform } from "react-native";
 import { AnswerModalMobile } from "./AnswerModalMobile";
 import { AnswerModalWeb } from "./AnswerModalWeb";
 
-interface AnswerModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
 
-export default function AnswerModal({ isOpen, onClose }: AnswerModalProps) {
+export default function AnswerModal() {
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const isWeb = Platform.OS === "web";
-
-    const [value, setValue] = useState("");
+    const { isOpen } = useModalBoxContext();
 
     const snapPoints = isWeb ? ["60%"] : ["100%"];
 
@@ -43,15 +39,14 @@ export default function AnswerModal({ isOpen, onClose }: AnswerModalProps) {
         <BottomSheetModal
             ref={bottomSheetRef}
             snapPoints={snapPoints}
-            onDismiss={onClose}
             backdropComponent={renderBackdrop}
             backgroundStyle={{ backgroundColor: "#1f1f22" }}
             handleIndicatorStyle={{ backgroundColor: "#525252" }}
         >
             {isWeb ? (
-                <AnswerModalWeb answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} value={value} onChange={setValue} />
+                <AnswerModalWeb answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
             ) : (
-                <AnswerModalMobile answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} value={value} onChange={setValue} />
+                <AnswerModalMobile answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
             )}
         </BottomSheetModal>
     );

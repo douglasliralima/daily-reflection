@@ -6,4 +6,6 @@ export default interface Answers {
         source: string;
     }>;
     votes: number;
+    optimistic?: boolean;
+    error?: boolean;
 }

@@ -1,15 +1,18 @@
+import useCreateAnswer from "@/hooks/useCreateAnswer";
 import { Pressable, Text } from "react-native";
 
 interface ShareButtonProps {
     enabled: boolean;
-    onPress?: () => void;
 }
 
-export function ShareButton({ enabled, onPress }: ShareButtonProps) {
+export function ShareButton(
+    { enabled }: ShareButtonProps) {
+    const { createAnswer } = useCreateAnswer();
+
     return (
         <Pressable
             disabled={!enabled}
-            onPress={onPress}
+            onPress={createAnswer}
             className={`w-full items-center justify-center rounded-xl py-3 ${enabled ? "bg-neutral-700" : "bg-neutral-800"
                 }`}
         >

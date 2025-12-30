@@ -1,15 +1,16 @@
+import { useModalBoxContext } from "@/context/ModalContext";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import { Text, TextInput, View } from "react-native";
-import { ShareButton } from "./ShareButton";
+import { ShareButton } from "./ShareButton/ShareButton";
 
 interface Props {
     answerLabel: string;
     answerPlaceholder: string;
-    value: string;
-    onChange: (v: string) => void;
 }
 
-export function AnswerModalWeb({ answerLabel, answerPlaceholder, value, onChange }: Props) {
+export function AnswerModalWeb({ answerLabel, answerPlaceholder }: Props) {
+    const { value, onChange } = useModalBoxContext();
+
     return (
         <BottomSheetView style={{ paddingHorizontal: 24, paddingBottom: 24 }}>
             <Text className="mb-3 text-sm font-medium text-neutral-200">

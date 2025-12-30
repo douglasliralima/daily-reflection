@@ -1,6 +1,6 @@
 import useAnswers from "@/components/AnswersList/hooks/useAnswers";
 import { Text, View } from "react-native";
-import AnswerCard from "./components/AnswerCard";
+import AnswerCard from "./components/AnswerCard/AnswerCard";
 
 export default function AnswersList() {
     const { answers } = useAnswers();

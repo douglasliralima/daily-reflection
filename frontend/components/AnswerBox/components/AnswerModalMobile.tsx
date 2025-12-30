@@ -1,18 +1,19 @@
+import { useModalBoxContext } from "@/context/ModalContext";
 import {
     BottomSheetScrollView,
     BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
 import { Text, View } from "react-native";
-import { ShareButton } from "./ShareButton";
+import { ShareButton } from "./ShareButton/ShareButton";
 
 interface Props {
     answerLabel: string;
     answerPlaceholder: string;
-    value: string;
-    onChange: (v: string) => void;
 }
 
-export function AnswerModalMobile({ answerLabel, answerPlaceholder, value, onChange }: Props) {
+export function AnswerModalMobile({ answerLabel, answerPlaceholder }: Props) {
+    const { value, onChange } = useModalBoxContext();
+
     return (
         <View>
             <View className="border-b border-neutral-800 px-6 py-5">

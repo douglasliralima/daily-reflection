@@ -1,4 +1,4 @@
-import mockAnswers from "@/mock/mockAnswers";
+import { mockAnswers } from "@/mock/mockAnswers";
 import Answers from "@/model/Answer";
 import { useQuery } from "@tanstack/react-query";
 

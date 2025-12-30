@@ -1,55 +1,37 @@
 import ReferencesModal from "@/components/AnswersList/components/ReferencesModal";
-import { useDebouncedEffect } from "@/hooks/useDebounceEffect";
-import mockVote from "@/mock/mockVote";
 import Answers from "@/model/Answer";
 import { BookOpen, ChevronDown, ChevronUp } from "lucide-react-native";
-import { useCallback, useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import useAnswerCard from "./hooks/useAnswerCard";
 
 export default function AnswerCard({ answer }: { answer: Answers }) {
-
-    const [votes, setVotes] = useState(answer.votes);
-    const [userVote, setUserVote] = useState<"up" | "down" | "neutral">("neutral");
-    const [openReferences, setOpenReferences] = useState(false);
-
-    const textColorClass = {
-        up: "font-bold text-green-500",
-        down: "font-bold text-red-500",
-        neutral: "text-neutral-400",
-    };
-
-    const handleVote = useCallback((type: "up" | "down") => {
-        if (userVote === type) {
-            setVotes((prevVotes) => (type === "up" ? prevVotes - 1 : prevVotes + 1));
-            setUserVote("neutral");
-        } else {
-            setVotes((prevVotes) => {
-                if (userVote === "neutral") {
-                    return type === "up" ? prevVotes + 1 : prevVotes - 1;
-                } else {
-                    return type === "up" ? prevVotes + 2 : prevVotes - 2;
-                }
-            });
-            setUserVote(type);
-        }
-    }, [userVote]);
-
-    useDebouncedEffect(
-        () => {
-            mockVote(answer.id, userVote);
-        },
-        [userVote],
-        600
-    );
+    const {
+        isOptimistic,
+        interactionsDisabled,
+        hasError,
+        votes,
+        userVote,
+        textColorClass,
+        openReferences,
+        setOpenReferences,
+        handleVote,
+        retryCreateAnswer
+    } = useAnswerCard({ answer });
 
     return (
-        <View className="px-6 py-4 border-b border-neutral-800">
+        <View
+            className="px-6 py-4 border-b border-neutral-800"
+            style={{
+                opacity: isOptimistic ? 0.55 : 1,
+            }}
+        >
             <Text className="text-lg text-neutral-200 leading-relaxed">
                 {answer.content}
             </Text>
             <View className="flex-row items-center justify-between mt-5">
                 <View className="flex-row items-center gap-1">
                     <Pressable
+                        disabled={interactionsDisabled}
                         onPress={() => handleVote("up")}
                         className="p-1.5 rounded"
                     >
@@ -68,6 +50,7 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
                     </Text>
 
                     <Pressable
+                        disabled={interactionsDisabled}
                         onPress={() => handleVote("down")}
                         className="p-1.5 rounded"
                     >
@@ -78,6 +61,19 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
                         />
                     </Pressable>
                 </View>
+
+                {hasError && (
+                    <Pressable
+                        onPress={() => {
+                            retryCreateAnswer(answer);
+                        }}
+                        className="mt-3 self-start"
+                    >
+                        <Text className="text-xs text-red-400 font-semibold">
+                            Failed to post. Tap to retry
+                        </Text>
+                    </Pressable>
+                )}
 
                 {answer.references && answer.references.length > 0 && (
                     <Pressable
