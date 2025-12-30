@@ -1,0 +1,17 @@
+1. Create the references behavior when adding a new answer
+2. Create the user in the answerList
+3. Initialize backend
+4. Create the signin/signup page with better-auth
+5. move mocks to backend
+    - history
+        - getAll
+    - question
+        - [ID]
+        - today
+            - getAll
+            - answer
+                - Complete CRUD
+6. Integrate backend with frontend
+7. Change lists to be paginated
+8. Create daily script to get top questions of reflexive reddits and save
+9. Creating monetization just to be able to make things running if someone wants to help
