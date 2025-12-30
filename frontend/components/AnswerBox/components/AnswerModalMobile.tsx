@@ -6,16 +6,18 @@ import { Text, View } from "react-native";
 import { ShareButton } from "./ShareButton";
 
 interface Props {
+    answerLabel: string;
+    answerPlaceholder: string;
     value: string;
     onChange: (v: string) => void;
 }
 
-export function AnswerModalMobile({ value, onChange }: Props) {
+export function AnswerModalMobile({ answerLabel, answerPlaceholder, value, onChange }: Props) {
     return (
         <View>
             <View className="border-b border-neutral-800 px-6 py-5">
                 <Text className="text-sm font-medium text-neutral-200">
-                    Your reflection
+                    {answerLabel}
                 </Text>
             </View>
 
@@ -32,7 +34,7 @@ export function AnswerModalMobile({ value, onChange }: Props) {
                     multiline
                     value={value}
                     onChangeText={onChange}
-                    placeholder="Take a moment. Write what comes to mind..."
+                    placeholder={answerPlaceholder}
                     placeholderTextColor="#6b7280"
                     textAlignVertical="top"
                     className="min-h-[220px] rounded-2xl bg-neutral-800 p-5"

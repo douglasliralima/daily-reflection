@@ -21,6 +21,9 @@ export default function AnswerModal({ isOpen, onClose }: AnswerModalProps) {
 
     const snapPoints = isWeb ? ["60%"] : ["100%"];
 
+    const answerLabel = "Your Reflection";
+    const answerPlaceholder = "Take a moment. Write what comes to mind...";
+
     useEffect(() => {
         if (isOpen) bottomSheetRef.current?.present();
         else bottomSheetRef.current?.dismiss();
@@ -46,9 +49,9 @@ export default function AnswerModal({ isOpen, onClose }: AnswerModalProps) {
             handleIndicatorStyle={{ backgroundColor: "#525252" }}
         >
             {isWeb ? (
-                <AnswerModalWeb value={value} onChange={setValue} />
+                <AnswerModalWeb answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} value={value} onChange={setValue} />
             ) : (
-                <AnswerModalMobile value={value} onChange={setValue} />
+                <AnswerModalMobile answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} value={value} onChange={setValue} />
             )}
         </BottomSheetModal>
     );
