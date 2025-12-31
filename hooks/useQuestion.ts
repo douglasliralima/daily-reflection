@@ -1,8 +1,8 @@
+import { DEFAULT_EXPIRATION_SECONDS } from "@/const";
 import { mockQuestion } from "@/mock/mockQuestion";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
-const DEFAULT_EXPIRATION_SECONDS = 48 * 60 * 60; // 48 hours
 
 export default function useQuestion() {
     const { data, isLoading, isError } = useQuery({

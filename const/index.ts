@@ -1,0 +1,6 @@
+const MAX_CHARS = 500
+
+const DEFAULT_EXPIRATION_SECONDS = 48 * 60 * 60; // 48 hours
+
+
+export { DEFAULT_EXPIRATION_SECONDS, MAX_CHARS };

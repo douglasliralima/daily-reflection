@@ -13,12 +13,14 @@ export function ShareButton(
         <Pressable
             disabled={!enabled}
             onPress={createAnswer}
-            className={`w-full items-center justify-center rounded-xl py-3 ${enabled ? "bg-neutral-700" : "bg-neutral-800"
+            className={`w-fit items-center justify-center rounded-xl py-2 px-4 ${enabled ? "bg-neutral-700" : "bg-neutral-800"
                 }`}
         >
             <Text
-                className={`text-sm font-medium ${enabled ? "text-neutral-100" : "text-neutral-500"
-                    }`}
+                className={
+                    `text-sm font-medium 
+                    ${enabled ? "text-neutral-100" : "text-neutral-500"}
+                    `}
             >
                 Share
             </Text>

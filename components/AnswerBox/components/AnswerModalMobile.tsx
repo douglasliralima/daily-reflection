@@ -1,9 +1,11 @@
+import { MAX_CHARS } from "@/const";
 import { useModalBoxContext } from "@/context/ModalContext";
 import {
     BottomSheetScrollView,
     BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
 import { Text, View } from "react-native";
+import { CharacterProgress } from "./CharactersProgress";
 import { ShareButton } from "./ShareButton/ShareButton";
 
 interface Props {
@@ -11,8 +13,13 @@ interface Props {
     answerPlaceholder: string;
 }
 
-export function AnswerModalMobile({ answerLabel, answerPlaceholder }: Props) {
+export function AnswerModalMobile({
+    answerLabel,
+    answerPlaceholder,
+}: Props) {
     const { value, onChange } = useModalBoxContext();
+
+    const currentLength = value.length;
 
     return (
         <View>
@@ -44,12 +51,21 @@ export function AnswerModalMobile({ answerLabel, answerPlaceholder }: Props) {
                         fontSize: 16,
                         lineHeight: 22,
                     }}
+                    maxLength={MAX_CHARS}
                 />
             </BottomSheetScrollView>
 
             {/* FOOTER */}
             <View className="border-t border-neutral-800 px-6 py-5">
-                <ShareButton enabled={!!value.trim()} />
+                <View className="flex-row gap-2 items-end justify-between">
+                    <CharacterProgress
+                        current={currentLength}
+                        max={MAX_CHARS}
+                        size={24}
+                    />
+
+                    <ShareButton enabled={!!value.trim()} />
+                </View>
             </View>
         </View>
     );
