@@ -33,6 +33,7 @@ export function CharacterProgress({
                 height: size,
                 alignItems: "center",
                 justifyContent: "center",
+                marginTop: 2,
             }}
         >
             <Svg

@@ -5,8 +5,7 @@ import {
     BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
 import { Text, View } from "react-native";
-import { CharacterProgress } from "./CharactersProgress";
-import { ShareButton } from "./ShareButton/ShareButton";
+import AnswerModalFooter from "./AnswerModalFooter/AnswerModalFooter";
 
 interface Props {
     answerLabel: string;
@@ -18,8 +17,6 @@ export function AnswerModalMobile({
     answerPlaceholder,
 }: Props) {
     const { value, onChange } = useModalBoxContext();
-
-    const currentLength = value.length;
 
     return (
         <View>
@@ -55,18 +52,7 @@ export function AnswerModalMobile({
                 />
             </BottomSheetScrollView>
 
-            {/* FOOTER */}
-            <View className="border-t border-neutral-800 px-6 py-5">
-                <View className="flex-row gap-2 items-end justify-between">
-                    <CharacterProgress
-                        current={currentLength}
-                        max={MAX_CHARS}
-                        size={24}
-                    />
-
-                    <ShareButton enabled={!!value.trim()} />
-                </View>
-            </View>
+            <AnswerModalFooter />
         </View>
     );
 }
