@@ -6,6 +6,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import { Text, View } from "react-native";
 import AnswerModalFooter from "./AnswerModalFooter/AnswerModalFooter";
+import { ReferenceInputToggle } from "./ReferencesSection";
 
 interface Props {
     answerLabel: string;
@@ -42,7 +43,7 @@ export function AnswerModalMobile({
                     placeholder={answerPlaceholder}
                     placeholderTextColor="#6b7280"
                     textAlignVertical="top"
-                    className="min-h-[220px] rounded-2xl bg-neutral-800 p-5"
+                    className="min-h-[220px] rounded-2xl bg-neutral-800 px-5 pt-5"
                     style={{
                         color: "#f5f5f5",
                         fontSize: 16,
@@ -51,6 +52,8 @@ export function AnswerModalMobile({
                     maxLength={MAX_CHARS}
                 />
             </BottomSheetScrollView>
+
+            <ReferenceInputToggle />
 
             <AnswerModalFooter />
         </View>

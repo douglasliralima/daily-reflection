@@ -15,7 +15,7 @@ export default function AnswerModal() {
     const isWeb = Platform.OS === "web";
     const { isOpen } = useModalBoxContext();
 
-    const snapPoints = isWeb ? ["60%"] : ["100%"];
+    const snapPoints = isWeb ? ["80%"] : ["100%"];
 
     const answerLabel = "Your Reflection";
     const answerPlaceholder = "Take a moment. Write what comes to mind...";

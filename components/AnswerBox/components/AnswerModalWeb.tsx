@@ -2,9 +2,9 @@ import { MAX_CHARS } from "@/const";
 import { useModalBoxContext } from "@/context/ModalContext";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import clsx from "clsx";
-import { useState } from "react";
 import { Text, TextInput } from "react-native";
 import AnswerModalFooter from "./AnswerModalFooter/AnswerModalFooter";
+import { ReferenceInputToggle } from "./ReferencesSection";
 
 interface Props {
     answerLabel: string;
@@ -13,17 +13,6 @@ interface Props {
 
 export function AnswerModalWeb({ answerLabel, answerPlaceholder }: Props) {
     const { value, onChange } = useModalBoxContext();
-
-    const [show, setShow] = useState(false);
-    const [text, setText] = useState("");
-    const [source, setSource] = useState("");
-
-    const handleAdd = () => {
-        // do something with text + source
-        setText("");
-        setSource("");
-        setShow(false);
-    };
 
     return (
         <BottomSheetView style={{ paddingHorizontal: 24, paddingBottom: 24 }}>
@@ -48,6 +37,7 @@ export function AnswerModalWeb({ answerLabel, answerPlaceholder }: Props) {
                     "bg-neutral-800 text-base text-neutral-100"
                 )}
             />
+            <ReferenceInputToggle />
 
             <AnswerModalFooter />
 
