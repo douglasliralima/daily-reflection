@@ -1,5 +1,5 @@
-import { Stack } from "expo-router"
 import { Pressable, Text, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const DATA = [
     {
@@ -36,48 +36,39 @@ const DATA = [
 
 export default function History() {
     return (
-        <>
-            <Stack.Screen
-                options={{
-                    title: "History",
-                    headerBackVisible: true, // optional, see explanation above
-                }}
-            />
+        <SafeAreaView className="flex-1 bg-neutral-950 px-4 pt-4">
+            {DATA.map((section) => (
+                <View key={section.title} className="mb-6">
+                    {/* Section title */}
+                    <Text className="text-neutral-400 text-sm mb-3">
+                        {section.title}
+                    </Text>
 
-            <View className="flex-1 bg-neutral-950 px-4 pt-4">
-                {DATA.map((section) => (
-                    <View key={section.title} className="mb-6">
-                        {/* Section title */}
-                        <Text className="text-neutral-400 text-sm mb-3">
-                            {section.title}
-                        </Text>
+                    {/* Entries */}
+                    <View className="gap-3">
+                        {section.items.map((item) => (
+                            <Pressable
+                                key={item.id}
+                                className="rounded-2xl bg-neutral-900 border border-neutral-800 p-4 active:bg-neutral-800"
+                                onPress={() => {
+                                    console.log("Open reflection", item.id)
+                                }}
+                            >
+                                <Text className="text-white text-base font-semibold">
+                                    {item.question}
+                                </Text>
 
-                        {/* Entries */}
-                        <View className="gap-3">
-                            {section.items.map((item) => (
-                                <Pressable
-                                    key={item.id}
-                                    className="rounded-2xl bg-neutral-900 border border-neutral-800 p-4 active:bg-neutral-800"
-                                    onPress={() => {
-                                        console.log("Open reflection", item.id)
-                                    }}
+                                <Text
+                                    className="text-neutral-400 text-sm mt-2"
+                                    numberOfLines={2}
                                 >
-                                    <Text className="text-white text-base font-semibold">
-                                        {item.question}
-                                    </Text>
-
-                                    <Text
-                                        className="text-neutral-400 text-sm mt-2"
-                                        numberOfLines={2}
-                                    >
-                                        {item.preview}
-                                    </Text>
-                                </Pressable>
-                            ))}
-                        </View>
+                                    {item.preview}
+                                </Text>
+                            </Pressable>
+                        ))}
                     </View>
-                ))}
-            </View>
-        </>
+                </View>
+            ))}
+        </SafeAreaView>
     )
 }

@@ -4,6 +4,8 @@ import type { BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useEffect, useMemo, useRef } from 'react';
 import { Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 interface ReferenceModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -21,6 +23,8 @@ export default function ReferenceModal({
 
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const snapPoints = useMemo(() => ['60%', '80%'], []);
+    const insets = useSafeAreaInsets()
+
 
     useEffect(() => {
         if (isOpen) {
@@ -41,6 +45,8 @@ export default function ReferenceModal({
 
     return (
         <BottomSheetModal
+            bottomInset={insets.bottom}
+            topInset={insets.top}
             ref={bottomSheetRef}
             snapPoints={snapPoints}
             enablePanDownToClose

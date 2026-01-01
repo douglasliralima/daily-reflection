@@ -6,11 +6,14 @@ import {
 } from "@gorhom/bottom-sheet";
 import { useEffect, useRef } from "react";
 import { Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { AnswerModalContentMobile } from "./components/AnswerModalContentMobile";
 import { AnswerModalContentWeb } from "./components/AnswerModalContentWeb";
 
 
 export default function AnswerModal() {
+    const insets = useSafeAreaInsets()
+
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const isWeb = Platform.OS === "web";
     const { isOpen, onClose } = useModalBoxContext();
@@ -37,6 +40,8 @@ export default function AnswerModal() {
 
     return (
         <BottomSheetModal
+            bottomInset={insets.bottom}
+            topInset={insets.top}
             ref={bottomSheetRef}
             snapPoints={snapPoints}
             backdropComponent={renderBackdrop}
