@@ -1,12 +1,14 @@
 import { MAX_CHARS } from "@/const";
 import { useModalBoxContext } from "@/context/ModalContext";
+import NewAnswer from "@/model/NewAnswer";
 import {
     BottomSheetScrollView,
     BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
+import { useEffect } from "react";
 import { Text, View } from "react-native";
 import AnswerModalFooter from "./components/AnswerModalFooter/AnswerModalFooter";
-import { ReferenceInputToggle } from "./components/ReferencesSection";
+import { ReferenceInputToggle } from "./components/ReferenceSection/ReferenceSection";
 
 interface Props {
     answerLabel: string;
@@ -17,7 +19,20 @@ export function AnswerModalMobile({
     answerLabel,
     answerPlaceholder,
 }: Props) {
-    const { value, onChange } = useModalBoxContext();
+    const { value, setValue } = useModalBoxContext<NewAnswer>();
+
+    useEffect(() => {
+        if (!value) {
+            setValue({ content: '' });
+        }
+    }, [value, setValue]);
+
+    const onChangeText = (text: string) => {
+        setValue((prev: NewAnswer | undefined) => ({
+            ...prev,
+            content: text,
+        } as NewAnswer));
+    }
 
     return (
         <View>
@@ -38,8 +53,8 @@ export function AnswerModalMobile({
                 <BottomSheetTextInput
                     autoFocus
                     multiline
-                    value={value}
-                    onChangeText={onChange}
+                    value={value?.content || ''}
+                    onChangeText={onChangeText}
                     placeholder={answerPlaceholder}
                     placeholderTextColor="#6b7280"
                     textAlignVertical="top"

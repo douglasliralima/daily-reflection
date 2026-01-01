@@ -75,22 +75,19 @@ export default function AnswerCard({ answer }: { answer: Answers }) {
                     </Pressable>
                 )}
 
-                {answer.references && answer.references.length > 0 && (
+                {answer.reference && (
                     <Pressable
                         className="flex-row items-center gap-1.5"
                         onPress={() => setOpenReferences(true)}
                     >
                         <BookOpen size={13} strokeWidth={1.5} color="#9ca3af" />
-                        <Text className="text-xs text-neutral-400">
-                            {answer.references.length}
-                        </Text>
                     </Pressable>
                 )}
             </View>
             <ReferencesModal
                 isOpen={openReferences}
                 onClose={() => setOpenReferences(false)}
-                references={answer.references || []}
+                reference={answer.reference}
             />
         </View>
     );

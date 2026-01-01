@@ -1,22 +1,22 @@
 import { createContext, useCallback, useContext, useState } from "react";
 
-interface ModalBoxContextProps {
+interface ModalBoxContextProps<T = object> {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
-    value: string;
-    onChange: (value: string) => void;
+    value: T | undefined;
+    setValue: React.Dispatch<React.SetStateAction<T | undefined>>;
 }
 
-const ModalBoxContext = createContext<ModalBoxContextProps | undefined>(undefined);
+const ModalBoxContext = createContext<ModalBoxContextProps<any> | undefined>(undefined);
 
-export function ModalBoxProvider({ children, ...props }: { children: React.ReactNode }) {
+export function ModalBoxProvider<T = object>({ children, ...props }: { children: React.ReactNode; initialValue?: T }) {
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState("");
+    const [value, setValue] = useState<T | undefined>();
 
     const onClose = useCallback(() => {
         setOpen(false);
-        setValue("");
+        setValue(undefined);
     }, []);
 
     return (
@@ -25,15 +25,15 @@ export function ModalBoxProvider({ children, ...props }: { children: React.React
             onOpen: () => setOpen(true),
             onClose,
             value,
-            onChange: setValue
+            setValue,
         }}>
             {children}
         </ModalBoxContext.Provider >
     );
 }
 
-export function useModalBoxContext() {
-    const context = useContext(ModalBoxContext);
+export function useModalBoxContext<T = object>() {
+    const context = useContext(ModalBoxContext) as ModalBoxContextProps<T> | undefined;
     if (!context) {
         throw new Error("useModalBoxContext must be used within an ModalBoxProvider");
     }

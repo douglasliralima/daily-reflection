@@ -1,24 +1,24 @@
+import ReferenceSection from '@/components/ReferenceContent/ReferenceContent';
+import Reference from '@/model/Reference';
 import type { BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useEffect, useMemo, useRef } from 'react';
 import { Text, View } from 'react-native';
-
-interface Reference {
-    text: string;
-    source?: string;
-}
-
-interface ReferencesModalProps {
+interface ReferenceModalProps {
     isOpen: boolean;
     onClose: () => void;
-    references: Reference[];
+    reference: Reference | undefined;
 }
 
-export default function ReferencesModal({
+export default function ReferenceModal({
     isOpen,
     onClose,
-    references,
-}: ReferencesModalProps) {
+    reference,
+}: ReferenceModalProps) {
+    if (!reference) {
+        return null;
+    }
+
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const snapPoints = useMemo(() => ['60%', '80%'], []);
 
@@ -51,25 +51,11 @@ export default function ReferencesModal({
         >
             <View className="px-6 pb-6 flex-1">
                 <Text className="text-xl font-bold text-neutral-100 mb-4">
-                    References
+                    Reference
                 </Text>
 
-                <BottomSheetScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 24 }}>
-                    {references.map((ref, index) => (
-                        <View
-                            key={index}
-                            className="mb-4 pb-4 border-b border-neutral-700"
-                        >
-                            <Text className="text-base text-neutral-200 leading-6">
-                                {ref.text}
-                            </Text>
-                            {ref.source ? (
-                                <Text className="text-sm text-neutral-400 mt-2">
-                                    Source: {ref.source}
-                                </Text>
-                            ) : null}
-                        </View>
-                    ))}
+                <BottomSheetScrollView contentContainerStyle={{ paddingBottom: 48 }}>
+                    <ReferenceSection reference={reference} />
                 </BottomSheetScrollView>
             </View>
         </BottomSheetModal>

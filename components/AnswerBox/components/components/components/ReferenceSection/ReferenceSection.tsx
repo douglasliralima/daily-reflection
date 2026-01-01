@@ -1,18 +1,13 @@
-import { Plus } from "lucide-react-native";
-import { useCallback, useMemo, useState } from "react";
+import ReferenceContent from "@/components/ReferenceContent/ReferenceContent";
+import { Pencil, Plus, Trash2 } from "lucide-react-native";
 import { Pressable, Text, TextInput, View } from "react-native";
-
-export type ReferenceDraft = {
-    text: string;
-    source: string;
-};
+import useReferenceSection from "./hooks/useReferenceSection";
 
 interface ReferenceInputToggleProps {
     /**
      * Called when user clicks "Add" with valid fields.
      * If you don't pass this, the component still works (it will just reset/close).
      */
-    onAdd?: (ref: ReferenceDraft) => void;
 
     /**
      * Optional: customize placeholders/labels.
@@ -23,42 +18,55 @@ interface ReferenceInputToggleProps {
 }
 
 export function ReferenceInputToggle({
-    onAdd,
     textPlaceholder = "Quote or reference text...",
     sourcePlaceholder = "Source (author, book, etc.)",
     buttonLabel = "Add a reference",
 }: ReferenceInputToggleProps) {
-    const [open, setOpen] = useState(false);
-    const [text, setText] = useState("");
-    const [source, setSource] = useState("");
-
-    const canAdd = useMemo(() => !!text.trim() && !!source.trim(), [text, source]);
-
-    const handleOpen = useCallback(() => {
-        setOpen(true);
-    }, []);
-
-    const handleCancel = useCallback(() => {
-        setOpen(false);
-        setText("");
-        setSource("");
-    }, []);
-
-    const handleAdd = useCallback(() => {
-        if (!canAdd) return;
-
-        const ref: ReferenceDraft = { text: text.trim(), source: source.trim() };
-        onAdd?.(ref);
-
-        // reset + close
-        setOpen(false);
-        setText("");
-        setSource("");
-    }, [canAdd, onAdd, source, text]);
+    const {
+        open,
+        text,
+        setText,
+        source,
+        setSource,
+        canAdd,
+        hasReference,
+        reference,
+        handleOpen,
+        handleCancel,
+        handleAdd,
+        handleEdit,
+        handleRemove,
+    } = useReferenceSection();
 
     return (
         <View className="pt-5">
-            {open ? (
+            {hasReference && !open && reference ? (
+                <View className="gap-3">
+                    <ReferenceContent reference={reference} />
+                    <View className="flex-row items-center gap-3">
+                        <Pressable
+                            onPress={handleEdit}
+                            className="flex-row items-center gap-2"
+                            hitSlop={8}
+                        >
+                            <Pencil size={14} strokeWidth={1.5} color="#9ca3af" />
+                            <Text className="text-xs font-medium text-neutral-400">
+                                Edit reference
+                            </Text>
+                        </Pressable>
+                        <Pressable
+                            onPress={handleRemove}
+                            className="flex-row items-center gap-2"
+                            hitSlop={8}
+                        >
+                            <Trash2 size={14} strokeWidth={1.5} color="#ef4444" />
+                            <Text className="text-xs font-medium text-red-400">
+                                Remove
+                            </Text>
+                        </Pressable>
+                    </View>
+                </View>
+            ) : open ? (
                 <View className="gap-3">
                     <TextInput
                         value={text}

@@ -1,23 +1,25 @@
 import { useModalBoxContext } from "@/context/ModalContext";
 import { mockNewAnswer } from "@/mock/mockAnswers";
 import Answers from "@/model/Answer";
+import NewAnswer from "@/model/NewAnswer";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function useCreateAnswer() {
-    const { value, onClose } = useModalBoxContext();
+    const { value, onClose } = useModalBoxContext<NewAnswer>();
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
         mutationFn: mockNewAnswer,
 
-        onMutate: async (content: string) => {
+        onMutate: async (newAnswer: NewAnswer) => {
             await queryClient.cancelQueries({ queryKey: ["answers"] });
 
             const optimisticId = crypto.randomUUID();
 
             const optimisticAnswer: Answers = {
                 id: optimisticId,
-                content,
+                content: newAnswer.content,
+                reference: newAnswer.reference || undefined,
                 votes: 0,
                 optimistic: true,
                 error: false,
@@ -57,6 +59,7 @@ export default function useCreateAnswer() {
     });
 
     function createAnswer() {
+        if (!value) return;
         mutation.mutate(value);
         onClose();
     }
@@ -68,7 +71,7 @@ export default function useCreateAnswer() {
             old.filter(a => a.id !== answer.id)
         );
 
-        mutation.mutate(answer.content);
+        mutation.mutate(answer);
     }
 
     return {

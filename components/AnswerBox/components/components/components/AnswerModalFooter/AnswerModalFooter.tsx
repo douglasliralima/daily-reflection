@@ -1,12 +1,13 @@
 import { MAX_CHARS } from "@/const";
 import { useModalBoxContext } from "@/context/ModalContext";
+import NewAnswer from "@/model/NewAnswer";
 import { Text, View } from "react-native";
 import { ShareButton } from "../ShareButton/ShareButton";
 import { CharacterProgress } from "./components/CharactersProgress";
 
 export default function AnswerModalFooter() {
-    const { value } = useModalBoxContext();
-    const currentLength = value.length;
+    const { value } = useModalBoxContext<NewAnswer>();
+    const currentLength = value?.content.length || 0;
 
     return <View className="py-4 items-center justify-between flex-row">
         <View className="flex flex-row gap-2 items-center">
@@ -21,6 +22,6 @@ export default function AnswerModalFooter() {
             </Text>
         </View>
 
-        <ShareButton enabled={!!value.trim()} />
+        <ShareButton enabled={!!value?.content.trim()} />
     </View>
 }

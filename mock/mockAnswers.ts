@@ -1,4 +1,5 @@
 import Answers from "@/model/Answer";
+import NewAnswer from "@/model/NewAnswer";
 
 const initialAnswers = [
     {
@@ -9,12 +10,11 @@ const initialAnswers = [
     {
         id: "2",
         content: "For me, intention has become less about control and more about return. I don't expect myself to be focused all the time. But I try to notice when I've drifted and gently come back. That noticing is the practice.",
-        references: [
-            {
-                text: "Attention is the beginning of devotion.",
-                source: "Mary Oliver"
-            }
-        ],
+        reference: {
+            text: "Attention is the beginning of devotion.",
+            source: "Mary Oliver"
+        }
+        ,
         votes: 7,
     },
     {
@@ -25,16 +25,10 @@ const initialAnswers = [
     {
         id: "4",
         content: "There's a passage I return to often when I think about this. It reminds me that attention itself is a form of prayer, a way of being present to what is sacred in the ordinary.",
-        references: [
-            {
-                text: "Be still, and know that I am God.",
-                source: "Psalm 46:10"
-            },
-            {
-                text: "The present moment is filled with joy and happiness. If you are attentive, you will see it.",
-                source: "Thich Nhat Hanh"
-            }
-        ],
+        reference: {
+            text: "Be still, and know that I am God.",
+            source: "Psalm 46:10"
+        },
         votes: 5,
     },
 ];
@@ -47,17 +41,18 @@ export function mockAnswers(): Promise<Answers[]> {
     });
 }
 
-export function mockNewAnswer(answerContent: string): Promise<Answers> {
+export function mockNewAnswer(newAnswer: NewAnswer): Promise<Answers> {
     return new Promise((resolve) => {
         setTimeout(() => {
-            const newAnswer: Answers = {
+            const newAnswerNormalized: Answers = {
                 id: (initialAnswers.length + 1).toString(),
-                content: answerContent,
+                content: newAnswer.content,
+                reference: newAnswer.reference || undefined,
                 votes: 0,
             };
-            initialAnswers.unshift(newAnswer);
-            console.log("New answer added:", newAnswer);
-            resolve(newAnswer);
+            initialAnswers.unshift(newAnswerNormalized);
+            console.log("New answer added:", newAnswerNormalized);
+            resolve(newAnswerNormalized);
         }, 2000);
     });
 }
