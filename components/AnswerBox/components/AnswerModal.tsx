@@ -13,7 +13,7 @@ import { AnswerModalWeb } from "./AnswerModalWeb";
 export default function AnswerModal() {
     const bottomSheetRef = useRef<BottomSheetModal>(null);
     const isWeb = Platform.OS === "web";
-    const { isOpen } = useModalBoxContext();
+    const { isOpen, onClose } = useModalBoxContext();
 
     const snapPoints = isWeb ? ["80%"] : ["100%"];
 
@@ -42,6 +42,7 @@ export default function AnswerModal() {
             backdropComponent={renderBackdrop}
             backgroundStyle={{ backgroundColor: "#1f1f22" }}
             handleIndicatorStyle={{ backgroundColor: "#525252" }}
+            onDismiss={onClose}
         >
             {isWeb ? (
                 <AnswerModalWeb answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
