@@ -1,4 +1,5 @@
 import ReferenceContent from "@/components/ReferenceContent/ReferenceContent";
+import { MAX_REFERENCE_SOURCE_LENGTH, MAX_REFERENCE_TEXT_LENGTH } from "@/const";
 import { Pencil, Plus, Trash2 } from "lucide-react-native";
 import { Pressable, Text, TextInput, View } from "react-native";
 import useNewReferenceSection from "./hooks/useNewReferenceSection";
@@ -60,31 +61,44 @@ export function NewReferenceSection({
                 </View>
             ) : open ? (
                 <View className="gap-3">
-                    <TextInput
-                        value={text}
-                        onChangeText={setText}
-                        placeholder={textPlaceholder}
-                        placeholderTextColor="#6b7280"
-                        className="w-full rounded-xl bg-neutral-800 px-4 py-3"
-                        style={{
-                            color: "#f5f5f5",
-                            fontSize: 14,
-                            lineHeight: 20,
-                        }}
-                    />
+                    <View className="relative">
+                        <TextInput
+                            value={text}
+                            onChangeText={setText}
+                            placeholder={textPlaceholder}
+                            placeholderTextColor="#6b7280"
+                            maxLength={MAX_REFERENCE_TEXT_LENGTH}
+                            multiline
+                            className="w-full rounded-xl bg-neutral-800 px-4 py-3 pr-16"
+                            style={{
+                                color: "#f5f5f5",
+                                fontSize: 14,
+                                lineHeight: 20,
+                            }}
+                        />
+                        <Text className="absolute bottom-6 right-3 text-xs text-neutral-500">
+                            {text.length}/{MAX_REFERENCE_TEXT_LENGTH}
+                        </Text>
+                    </View>
 
-                    <TextInput
-                        value={source}
-                        onChangeText={setSource}
-                        placeholder={sourcePlaceholder}
-                        placeholderTextColor="#6b7280"
-                        className="w-full rounded-xl bg-neutral-800 px-4 py-3"
-                        style={{
-                            color: "#f5f5f5",
-                            fontSize: 14,
-                            lineHeight: 20,
-                        }}
-                    />
+                    <View className="relative">
+                        <TextInput
+                            value={source}
+                            onChangeText={setSource}
+                            placeholder={sourcePlaceholder}
+                            placeholderTextColor="#6b7280"
+                            maxLength={MAX_REFERENCE_SOURCE_LENGTH}
+                            className="w-full rounded-xl bg-neutral-800 px-4 py-3 pr-16"
+                            style={{
+                                color: "#f5f5f5",
+                                fontSize: 14,
+                                lineHeight: 20,
+                            }}
+                        />
+                        <Text className="absolute bottom-6 right-3 text-xs text-neutral-500">
+                            {source.length}/{MAX_REFERENCE_SOURCE_LENGTH}
+                        </Text>
+                    </View>
 
                     <View className="flex-row items-center gap-3">
                         <Pressable onPress={handleCancel} hitSlop={8}>
