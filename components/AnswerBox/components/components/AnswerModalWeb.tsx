@@ -3,8 +3,8 @@ import { useModalBoxContext } from "@/context/ModalContext";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import clsx from "clsx";
 import { Text, TextInput } from "react-native";
-import AnswerModalFooter from "./AnswerModalFooter/AnswerModalFooter";
-import { ReferenceInputToggle } from "./ReferencesSection";
+import AnswerModalFooter from "./components/AnswerModalFooter/AnswerModalFooter";
+import { ReferenceInputToggle } from "./components/ReferencesSection";
 
 interface Props {
     answerLabel: string;

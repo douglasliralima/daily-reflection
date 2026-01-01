@@ -6,8 +6,8 @@ import {
 } from "@gorhom/bottom-sheet";
 import { useEffect, useRef } from "react";
 import { Platform } from "react-native";
-import { AnswerModalMobile } from "./AnswerModalMobile";
-import { AnswerModalWeb } from "./AnswerModalWeb";
+import { AnswerModalMobile } from "./components/AnswerModalMobile";
+import { AnswerModalWeb } from "./components/AnswerModalWeb";
 
 
 export default function AnswerModal() {

@@ -5,8 +5,8 @@ import {
     BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
 import { Text, View } from "react-native";
-import AnswerModalFooter from "./AnswerModalFooter/AnswerModalFooter";
-import { ReferenceInputToggle } from "./ReferencesSection";
+import AnswerModalFooter from "./components/AnswerModalFooter/AnswerModalFooter";
+import { ReferenceInputToggle } from "./components/ReferencesSection";
 
 interface Props {
     answerLabel: string;
