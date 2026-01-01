@@ -5,7 +5,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import { Text, View } from "react-native";
 import AnswerModalFooter from "./components/AnswerModalFooter/AnswerModalFooter";
-import { ReferenceInputToggle } from "./components/ReferenceSection/ReferenceSection";
+import { NewReferenceSection } from "./components/NewReferenceSection/NewReferenceSection";
 import useAnswerModalContent from "./hooks/useAnswerModalContent";
 
 interface Props {
@@ -53,7 +53,7 @@ export function AnswerModalContentMobile({
                 />
             </BottomSheetScrollView>
 
-            <ReferenceInputToggle />
+            <NewReferenceSection />
 
             <AnswerModalFooter />
         </View>

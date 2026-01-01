@@ -1,27 +1,19 @@
 import ReferenceContent from "@/components/ReferenceContent/ReferenceContent";
 import { Pencil, Plus, Trash2 } from "lucide-react-native";
 import { Pressable, Text, TextInput, View } from "react-native";
-import useReferenceSection from "./hooks/useReferenceSection";
+import useNewReferenceSection from "./hooks/useNewReferenceSection";
 
-interface ReferenceInputToggleProps {
-    /**
-     * Called when user clicks "Add" with valid fields.
-     * If you don't pass this, the component still works (it will just reset/close).
-     */
-
-    /**
-     * Optional: customize placeholders/labels.
-     */
+interface NewReferenceSectionProps {
     textPlaceholder?: string;
     sourcePlaceholder?: string;
     buttonLabel?: string;
 }
 
-export function ReferenceInputToggle({
+export function NewReferenceSection({
     textPlaceholder = "Quote or reference text...",
     sourcePlaceholder = "Source (author, book, etc.)",
     buttonLabel = "Add a reference",
-}: ReferenceInputToggleProps) {
+}: NewReferenceSectionProps) {
     const {
         open,
         text,
@@ -36,7 +28,7 @@ export function ReferenceInputToggle({
         handleAdd,
         handleEdit,
         handleRemove,
-    } = useReferenceSection();
+    } = useNewReferenceSection();
 
     return (
         <View className="pt-5">

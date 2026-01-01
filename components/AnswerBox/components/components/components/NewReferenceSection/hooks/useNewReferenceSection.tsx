@@ -4,7 +4,7 @@ import Reference from "@/model/Reference";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 
-export default function useReferenceSection() {
+export default function useNewReferenceSection() {
     const { value, setValue } = useModalBoxContext<NewAnswer>();
 
     const [open, setOpen] = useState(false);
