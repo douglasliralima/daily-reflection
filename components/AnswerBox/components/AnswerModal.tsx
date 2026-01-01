@@ -6,8 +6,8 @@ import {
 } from "@gorhom/bottom-sheet";
 import { useEffect, useRef } from "react";
 import { Platform } from "react-native";
-import { AnswerModalMobile } from "./components/AnswerModalMobile";
-import { AnswerModalWeb } from "./components/AnswerModalWeb";
+import { AnswerModalContentMobile } from "./components/AnswerModalContentMobile";
+import { AnswerModalContentWeb } from "./components/AnswerModalContentWeb";
 
 
 export default function AnswerModal() {
@@ -45,9 +45,9 @@ export default function AnswerModal() {
             onDismiss={onClose}
         >
             {isWeb ? (
-                <AnswerModalWeb answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
+                <AnswerModalContentWeb answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
             ) : (
-                <AnswerModalMobile answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
+                <AnswerModalContentMobile answerLabel={answerLabel} answerPlaceholder={answerPlaceholder} />
             )}
         </BottomSheetModal>
     );

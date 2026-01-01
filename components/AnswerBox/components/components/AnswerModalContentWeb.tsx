@@ -1,33 +1,19 @@
 import { MAX_CHARS } from "@/const";
-import { useModalBoxContext } from "@/context/ModalContext";
-import NewAnswer from "@/model/NewAnswer";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 import clsx from "clsx";
-import { useEffect } from "react";
 import { Text, TextInput } from "react-native";
 import AnswerModalFooter from "./components/AnswerModalFooter/AnswerModalFooter";
 import { ReferenceInputToggle } from "./components/ReferenceSection/ReferenceSection";
+import useAnswerModalContent from "./hooks/useAnswerModalContent";
 
 interface Props {
     answerLabel: string;
     answerPlaceholder: string;
 }
 
-export function AnswerModalWeb({ answerLabel, answerPlaceholder }: Props) {
-    const { value, setValue } = useModalBoxContext<NewAnswer>();
+export function AnswerModalContentWeb({ answerLabel, answerPlaceholder }: Props) {
+    const { onChangeText, value } = useAnswerModalContent();
 
-    useEffect(() => {
-        if (!value) {
-            setValue({ content: '' });
-        }
-    }, [value, setValue]);
-
-    const onChangeText = (text: string) => {
-        setValue((prev: NewAnswer | undefined) => ({
-            ...prev,
-            content: text,
-        } as NewAnswer));
-    }
 
     return (
         <BottomSheetView style={{ paddingHorizontal: 24, paddingBottom: 24 }}>

@@ -1,38 +1,23 @@
 import { MAX_CHARS } from "@/const";
-import { useModalBoxContext } from "@/context/ModalContext";
-import NewAnswer from "@/model/NewAnswer";
 import {
     BottomSheetScrollView,
     BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
-import { useEffect } from "react";
 import { Text, View } from "react-native";
 import AnswerModalFooter from "./components/AnswerModalFooter/AnswerModalFooter";
 import { ReferenceInputToggle } from "./components/ReferenceSection/ReferenceSection";
+import useAnswerModalContent from "./hooks/useAnswerModalContent";
 
 interface Props {
     answerLabel: string;
     answerPlaceholder: string;
 }
 
-export function AnswerModalMobile({
+export function AnswerModalContentMobile({
     answerLabel,
     answerPlaceholder,
 }: Props) {
-    const { value, setValue } = useModalBoxContext<NewAnswer>();
-
-    useEffect(() => {
-        if (!value) {
-            setValue({ content: '' });
-        }
-    }, [value, setValue]);
-
-    const onChangeText = (text: string) => {
-        setValue((prev: NewAnswer | undefined) => ({
-            ...prev,
-            content: text,
-        } as NewAnswer));
-    }
+    const { onChangeText, value } = useAnswerModalContent();
 
     return (
         <View>
