@@ -1,4 +1,4 @@
-1. Create the references behavior when adding a new answer
+1. Create the references behavior when adding a new answer - x
 2. Create the user in the answerList
 3. Initialize backend
 4. Create the signin/signup page with better-auth
